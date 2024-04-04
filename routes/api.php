@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Middleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,4 +44,12 @@ Route::patch('/patch/{id}', function (){
 
 Route::delete('/delete/{id}', function (){
     return 'this si a delete method';
+});
+
+Route::middleware('method')->group(function(){
+    Route::get('/pogi',[UserController::class, 'index']);
+    Route::patch('/pogi/{id}',[UserController::class, 'update']);
+    Route::post('/pogi',[UserController::class, 'store']);
+    Route::put('/pogi/{id}',[UserController::class, 'update']);
+    Route::delete('/pogi/{id}',[UserController::class, 'destroy']);
 });
